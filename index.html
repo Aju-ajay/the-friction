@@ -1,0 +1,726 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>THE FRICTION | Train Without Limits</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap');
+
+:root {
+  --black: #101010;
+  --dark: #181818;
+  --white: #f7f7f4;
+  --lime: #c6ff00;
+  --grey: #999;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--white);
+  color: var(--black);
+  font-family: 'Inter', sans-serif;
+}
+
+a { text-decoration: none; color: inherit; }
+
+.announcement {
+  background: var(--lime);
+  text-align: center;
+  padding: 10px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+header {
+  background: var(--black);
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 7%;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.logo {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 35px;
+  font-weight: 900;
+  letter-spacing: 2px;
+}
+
+.logo span { color: var(--lime); }
+
+nav {
+  display: flex;
+  gap: 30px;
+}
+
+nav a {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  transition: .2s;
+}
+
+nav a:hover { color: var(--lime); }
+
+.cart {
+  border: 1px solid #555;
+  padding: 10px 15px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.cart span { color: var(--lime); }
+
+.menu-btn {
+  display: none;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 25px;
+  cursor: pointer;
+}
+
+.hero {
+  min-height: 610px;
+  background:
+    linear-gradient(90deg, rgba(0,0,0,.92), rgba(0,0,0,.2)),
+    url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=1800&q=85');
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  padding: 70px 9%;
+  color: white;
+}
+
+.hero-content { max-width: 650px; }
+
+.hero-label {
+  color: var(--lime);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 4px;
+  margin-bottom: 20px;
+}
+
+.hero h1 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(65px, 10vw, 115px);
+  line-height: .85;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.hero h1 span { color: var(--lime); }
+
+.hero p {
+  color: #ddd;
+  margin: 25px 0;
+  line-height: 1.8;
+  max-width: 440px;
+  font-size: 14px;
+}
+
+.btn {
+  display: inline-block;
+  padding: 16px 27px;
+  background: var(--lime);
+  color: black;
+  font-weight: 900;
+  font-size: 12px;
+  letter-spacing: 1px;
+  border: none;
+  cursor: pointer;
+  transition: .2s;
+}
+
+.btn:hover {
+  background: white;
+  transform: translateY(-2px);
+}
+
+.section {
+  padding: 80px 7%;
+}
+
+.section-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  margin-bottom: 35px;
+  gap: 15px;
+}
+
+.section-heading h2 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 48px;
+  text-transform: uppercase;
+}
+
+.section-heading h2 span { color: #83a900; }
+
+.section-heading p {
+  color: #777;
+  font-size: 12px;
+  letter-spacing: 1px;
+}
+
+.categories {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+.category {
+  height: 360px;
+  position: relative;
+  overflow: hidden;
+  background: #222;
+}
+
+.category img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: .5s;
+}
+
+.category:hover img { transform: scale(1.08); }
+
+.category::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(transparent, rgba(0,0,0,.8));
+}
+
+.category-info {
+  position: absolute;
+  bottom: 25px;
+  left: 25px;
+  color: white;
+  z-index: 2;
+}
+
+.category-info h3 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 38px;
+  text-transform: uppercase;
+}
+
+.category-info p {
+  font-size: 11px;
+  color: var(--lime);
+  font-weight: 800;
+  letter-spacing: 2px;
+  margin-top: 5px;
+}
+
+.shop-section { background: #eeeeea; }
+
+.search {
+  width: 100%;
+  max-width: 350px;
+  padding: 13px 15px;
+  border: 1px solid #ccc;
+  background: white;
+  outline: none;
+  font-size: 13px;
+  margin-bottom: 20px;
+}
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 30px;
+}
+
+.filters button {
+  background: transparent;
+  border: 1px solid #aaa;
+  padding: 10px 18px;
+  font-size: 11px;
+  font-weight: 800;
+  cursor: pointer;
+  letter-spacing: 1px;
+}
+
+.filters button.active,
+.filters button:hover {
+  background: var(--black);
+  color: white;
+  border-color: var(--black);
+}
+
+.products {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 22px;
+}
+
+.product {
+  background: white;
+  overflow: hidden;
+}
+
+.product-image {
+  position: relative;
+  height: 310px;
+  overflow: hidden;
+  background: #ddd;
+}
+
+.product-image img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  transition: .4s;
+}
+
+.product:hover .product-image img {
+  transform: scale(1.06);
+}
+
+.tag {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: var(--lime);
+  padding: 7px 10px;
+  font-size: 9px;
+  font-weight: 900;
+}
+
+.product-info { padding: 17px; }
+
+.product-info small {
+  color: #888;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.product-info h3 {
+  font-size: 14px;
+  margin: 9px 0;
+}
+
+.product-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 15px;
+}
+
+.price { font-weight: 800; }
+
+.product-bottom button {
+  background: var(--black);
+  color: white;
+  border: none;
+  padding: 10px 13px;
+  font-size: 10px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.product-bottom button:hover {
+  background: #83a900;
+  color: black;
+}
+
+.empty {
+  grid-column: 1/-1;
+  padding: 30px;
+  text-align: center;
+  color: #777;
+}
+
+.motto {
+  background: var(--lime);
+  padding: 65px 15px;
+  text-align: center;
+}
+
+.motto h2 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(45px, 8vw, 80px);
+  font-weight: 900;
+  line-height: 1;
+}
+
+.motto p {
+  margin-top: 15px;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 3px;
+}
+
+.creator {
+  background: var(--black);
+  color: white;
+  padding: 75px 7%;
+  text-align: center;
+}
+
+.creator h2 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 48px;
+  margin-bottom: 15px;
+}
+
+.creator h2 span { color: var(--lime); }
+
+.creator p {
+  color: #aaa;
+  line-height: 1.8;
+  margin: 0 auto 25px;
+  max-width: 500px;
+  font-size: 13px;
+}
+
+footer {
+  background: #080808;
+  color: white;
+  padding: 40px 7%;
+  text-align: center;
+}
+
+footer .logo { margin-bottom: 12px; }
+
+footer p {
+  font-size: 11px;
+  color: #777;
+  margin-top: 10px;
+}
+
+@media(max-width: 900px) {
+  .products { grid-template-columns: repeat(2, 1fr); }
+  .category { height: 280px; }
+}
+
+@media(max-width: 600px) {
+  header { padding: 15px 5%; }
+  .logo { font-size: 28px; }
+  .menu-btn { display: block; }
+  nav {
+    display: none;
+    position: absolute;
+    top: 65px;
+    left: 0;
+    width: 100%;
+    background: #101010;
+    flex-direction: column;
+    padding: 25px;
+  }
+  nav.open { display: flex; }
+  .cart { padding: 8px; }
+  .hero { min-height: 520px; padding: 50px 7%; }
+  .section { padding: 55px 5%; }
+  .section-heading h2 { font-size: 37px; }
+  .categories { grid-template-columns: 1fr; }
+  .category { height: 320px; }
+  .product-image { height: 230px; }
+  .product-info { padding: 12px; }
+  .product-bottom button { padding: 9px; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="announcement">
+  TRAIN HARDER. MOVE STRONGER. LIVE BETTER.
+</div>
+
+<header>
+  <a href="#home" class="logo">THE <span>FRICTION</span></a>
+
+  <nav id="nav">
+    <a href="#home">HOME</a>
+    <a href="#categories">CATEGORIES</a>
+    <a href="#shop">SHOP</a>
+    <a href="#about">ABOUT</a>
+  </nav>
+
+  <div class="cart">BAG <span id="cartCount">0</span></div>
+  <button class="menu-btn" onclick="toggleMenu()">☰</button>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-content">
+    <div class="hero-label">BUILT FOR THE GRIND</div>
+
+    <h1>NO EXCUSES.<br><span>JUST WORK.</span></h1>
+
+    <p>
+      Your body. Your limits. Your journey.
+      Discover gym wear designed for movement,
+      confidence and performance.
+    </p>
+
+    <a href="#shop" class="btn">EXPLORE COLLECTION →</a>
+  </div>
+</section>
+
+<!-- CATEGORIES -->
+<section class="section" id="categories">
+
+  <div class="section-heading">
+    <div>
+      <p>FIND YOUR FIT</p>
+      <h2>SHOP BY <span>CATEGORY</span></h2>
+    </div>
+  </div>
+
+  <div class="categories">
+
+    <a href="#shop" class="category" onclick="selectCategory('men')">
+      <img src="https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?auto=format&fit=crop&w=800&q=80" alt="Men gym wear">
+      <div class="category-info">
+        <h3>MEN'S WEAR</h3>
+        <p>TRAIN WITHOUT LIMITS →</p>
+      </div>
+    </a>
+
+    <a href="#shop" class="category" onclick="selectCategory('women')">
+      <img src="https://images.unsplash.com/photo-1546483875-ad9014c88eba?auto=format&fit=crop&w=800&q=80" alt="Women's activewear">
+      <div class="category-info">
+        <h3>WOMEN'S WEAR</h3>
+        <p>OWN YOUR STRENGTH →</p>
+      </div>
+    </a>
+
+    <a href="#shop" class="category" onclick="selectCategory('accessories')">
+      <img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&w=800&q=80" alt="Fitness training">
+      <div class="category-info">
+        <h3>ACCESSORIES</h3>
+        <p>EVERY REP COUNTS →</p>
+      </div>
+    </a>
+
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section class="section shop-section" id="shop">
+
+  <div class="section-heading">
+    <div>
+      <p>GEAR UP FOR GREATNESS</p>
+      <h2>THE <span>COLLECTION</span></h2>
+    </div>
+  </div>
+
+  <input
+    type="text"
+    id="search"
+    class="search"
+    placeholder="Search gym wear..."
+    oninput="renderProducts()"
+  >
+
+  <div class="filters">
+    <button class="active" onclick="selectCategory('all')">ALL</button>
+    <button onclick="selectCategory('men')">MEN</button>
+    <button onclick="selectCategory('women')">WOMEN</button>
+    <button onclick="selectCategory('accessories')">ACCESSORIES</button>
+  </div>
+
+  <div class="products" id="productList"></div>
+
+</section>
+
+<!-- BRAND MESSAGE -->
+<section class="motto">
+  <h2>EMBRACE THE<br>FRICTION.</h2>
+  <p>PROGRESS IS NEVER COMFORTABLE.</p>
+</section>
+
+<!-- CREATOR / YOUTUBE -->
+<section class="creator" id="about">
+  <p>FITNESS. DISCIPLINE. CONSISTENCY.</p>
+  <h2>BUILT AROUND <span>FITNESS.</span></h2>
+  <p>
+    THE FRICTION is a gym-wear brand concept
+    for people who believe in showing up,
+    putting in the work and becoming stronger every day.
+  </p>
+
+  <a
+    class="btn"
+    href="https://www.youtube.com/@Fitby_nikhilnarayan"
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    WATCH FITNESS CONTENT →
+  </a>
+</section>
+
+<footer>
+  <div class="logo">THE <span>FRICTION</span></div>
+  <p>GYM WEAR • FITNESS • PERFORMANCE</p>
+  <p>© 2026 THE FRICTION. ALL RIGHTS RESERVED.</p>
+</footer>
+
+<script>
+
+// EDIT YOUR PRODUCTS HERE
+const products = [
+  {
+    name: "Performance Training T-Shirt",
+    category: "men",
+    type: "MEN'S COLLECTION",
+    price: 599,
+    image: "https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?auto=format&fit=crop&w=600&q=80",
+    link: "https://www.google.com/search?q=mens+gym+tshirt"
+  },
+  {
+    name: "Compression Gym T-Shirt",
+    category: "men",
+    type: "MEN'S COLLECTION",
+    price: 699,
+    image: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=600&q=80",
+    link: "https://www.google.com/search?q=mens+compression+gym+shirt"
+  },
+  {
+    name: "Women's Gym Leggings",
+    category: "women",
+    type: "WOMEN'S COLLECTION",
+    price: 799,
+    image: "https://images.unsplash.com/photo-1546483875-ad9014c88eba?auto=format&fit=crop&w=600&q=80",
+    link: "https://www.google.com/search?q=womens+gym+leggings"
+  },
+  {
+    name: "Women's Sportswear",
+    category: "women",
+    type: "WOMEN'S COLLECTION",
+    price: 899,
+    image: "https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&w=600&q=80",
+    link: "https://www.google.com/search?q=womens+gym+wear"
+  },
+  {
+    name: "Training Shorts",
+    category: "men",
+    type: "MEN'S COLLECTION",
+    price: 499,
+    image: "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&w=600&q=80",
+    link: "https://www.google.com/search?q=mens+gym+shorts"
+  },
+  {
+    name: "Women's Workout Set",
+    category: "women",
+    type: "WOMEN'S COLLECTION",
+    price: 1099,
+    image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&w=600&q=80",
+    link: "https://www.google.com/search?q=womens+gym+set"
+  },
+  {
+    name: "Fitness Accessories",
+    category: "accessories",
+    type: "ACCESSORIES",
+    price: 299,
+    image: "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&w=600&q=80",
+    link: "https://www.google.com/search?q=fitness+accessories"
+  },
+  {
+    name: "Gym Training Outfit",
+    category: "men",
+    type: "MEN'S COLLECTION",
+    price: 899,
+    image: "https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?auto=format&fit=crop&w=600&q=80",
+    link: "https://www.google.com/search?q=mens+training+outfit"
+  }
+];
+
+let activeCategory = "all";
+let cart = 0;
+
+function renderProducts() {
+  const list = document.getElementById("productList");
+  const search = document.getElementById("search").value.toLowerCase();
+
+  const filtered = products.filter(product => {
+    const categoryMatch =
+      activeCategory === "all" ||
+      product.category === activeCategory;
+
+    const searchMatch = product.name.toLowerCase().includes(search);
+
+    return categoryMatch && searchMatch;
+  });
+
+  if (filtered.length === 0) {
+    list.innerHTML = '<div class="empty">No products found. Try another search.</div>';
+    return;
+  }
+
+  list.innerHTML = filtered.map(product => `
+    <article class="product">
+      <div class="product-image">
+        <img src="${product.image}" alt="${product.name}" loading="lazy">
+        <span class="tag">NEW DROP</span>
+      </div>
+
+      <div class="product-info">
+        <small>${product.type}</small>
+        <h3>${product.name}</h3>
+
+        <div class="product-bottom">
+          <span class="price">₹${product.price.toLocaleString("en-IN")}</span>
+
+          <button onclick="window.open('${product.link}', '_blank', 'noopener')">
+            VIEW PRODUCT →
+          </button>
+        </div>
+      </div>
+    </article>
+  `).join("");
+}
+
+function selectCategory(category) {
+  activeCategory = category;
+
+  document.querySelectorAll(".filters button").forEach(button => {
+    button.classList.toggle(
+      "active",
+      button.textContent.toLowerCase() === category
+    );
+  });
+
+  renderProducts();
+}
+
+function toggleMenu() {
+  document.getElementById("nav").classList.toggle("open");
+}
+
+document.getElementById("nav").querySelectorAll("a").forEach(link => {
+  link.addEventListener("click", () => {
+    document.getElementById("nav").classList.remove("open");
+  });
+});
+
+renderProducts();
+
+</script>
+
+</body>
+</html>
